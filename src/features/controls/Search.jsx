@@ -1,10 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import { IoSearch } from "react-icons/io5";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { selectSearch } from "../store/controls/controls-selectors";
-import { setSearch } from "../store/controls/controls-actions";
+import { IoSearch } from 'react-icons/io5'
+import { useSearch } from './use-search'
 
 const InputContainer = styled.label`
   background-color: var(--colors-ui-base);
@@ -21,31 +18,25 @@ const InputContainer = styled.label`
     margin-bottom: 0;
     width: 280px;
   }
-`;
+`
 
 const Input = styled.input.attrs({
-  type: "search",
-  placeholder: "Search for a country...",
+  type: 'search',
+  placeholder: 'Search for a country...',
 })`
   margin-left: 2rem;
   border: none;
   outline: none;
   color: var(--color-text);
   background-color: var(--colors-ui-base);
-`;
+`
 
 export const Search = () => {
-  const dispatch = useDispatch();
-  const search = useSelector(selectSearch);
-
-  const handleSeacrh = (e) => {
-    dispatch(setSearch(e.target.value));
-  };
-
+  const [search, handleSeacrh] = useSearch()
   return (
     <InputContainer>
       <IoSearch />
       <Input onChange={handleSeacrh} value={search} />
     </InputContainer>
-  );
-};
+  )
+}
